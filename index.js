@@ -34,22 +34,36 @@ function deleteNote(index) {
   showAllNotes();
 }
 
-searchFunct();
+runSearch();
 
-function searchFunct() {
+function runSearch() {
   let search = document.getElementById("searchTxt");
+  let didItRan = false;
+
   search.addEventListener("input", function () {
     let inputValue = search.value.toLowerCase();
-    let noteCards = document.getElementsByClassName("noteCard");
-    Array.from(noteCards).forEach(function (element) {
-      let cardBody = element.getElementsByTagName("p")[0].innerText;
-      let cardTitle = element.getElementsByTagName("h5")[0].innerText;
-      if (cardTitle.includes(inputValue) || cardBody.includes(inputValue)) {
+    let noteCardsArray = document.getElementsByClassName("noteCard");
+
+    if (inputValue.length) {
+      didItRan = true;
+
+      Array.from(noteCardsArray).forEach(function (element) {
+        let cardBody = element.getElementsByTagName("p")[0].innerText;
+        let cardTitle = element.getElementsByTagName("h5")[0].innerText;
+        if (cardTitle.includes(inputValue) || cardBody.includes(inputValue)) {
+          element.style.display = "block";
+        } else {
+          element.style.display = "none";
+        }
+      });
+
+    }
+    //reset search
+    if (!inputValue.length && didItRan) {
+      Array.from(noteCardsArray).forEach(function (element) {
         element.style.display = "block";
-      } else {
-        element.style.display = "none";
-      }
-    });
+      });
+    }
   });
 }
 
