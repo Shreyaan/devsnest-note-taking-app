@@ -6,8 +6,8 @@ addBtn.addEventListener("click", function (e) {
   let NotesBody = document.getElementById("notesBody");
   let NotesTitle = document.getElementById("notesTitle");
   getNotesFromLocal();
-  notesObj.push({ title: NotesTitle.value, body: NotesBody.value });
-  localStorage.setItem("notes", JSON.stringify(notesObj));
+  mainNotesArray.push({ title: NotesTitle.value, body: NotesBody.value });
+  localStorage.setItem("notes", JSON.stringify(mainNotesArray));
   NotesBody.value = "";
   NotesTitle.value = "";
   showAllNotes();
@@ -16,11 +16,11 @@ addBtn.addEventListener("click", function (e) {
 function showAllNotes() {
   getNotesFromLocal();
   let allCards = "";
-  notesObj.forEach(function (element, i) {
+  mainNotesArray.forEach(function (element, i) {
     allCards += cardHtml(i, element);
   });
   let notesContainer = document.getElementById("notes");
-  if (notesObj.length != 0) {
+  if (mainNotesArray.length != 0) {
     notesContainer.innerHTML = allCards;
   } else {
     notesContainer.innerHTML = `Nothing to show! Use "Add a Note" button above to add notes.`;
@@ -29,8 +29,8 @@ function showAllNotes() {
 
 function deleteNote(index) {
   getNotesFromLocal();
-  notesObj.splice(index, 1);
-  localStorage.setItem("notes", JSON.stringify(notesObj));
+  mainNotesArray.splice(index, 1);
+  localStorage.setItem("notes", JSON.stringify(mainNotesArray));
   showAllNotes();
 }
 
@@ -72,9 +72,9 @@ function runSearch() {
 function getNotesFromLocal() {
   let notes = localStorage.getItem("notes");
   if (notes == null) {
-    notesObj = [];
+    mainNotesArray = [];
   } else {
-    notesObj = JSON.parse(notes);
+    mainNotesArray = JSON.parse(notes);
   }
 }
 
