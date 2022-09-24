@@ -43,12 +43,11 @@ function runSearch() {
   search.addEventListener("input", function () {
     let inputValue = search.value.toLowerCase();
     let noteCardsArray = document.getElementsByClassName("noteCard");
-
     if (inputValue.length) {
       didItRan = true;
-
+      
       Array.from(noteCardsArray).forEach(function (element) {
-        let cardBody = element.getElementsByTagName("p")[0].innerText;
+        let cardBody = element.querySelectorAll("#note_body")[0].innerText;
         let cardTitle = element.getElementsByTagName("h5")[0].innerText;
         if (cardTitle.includes(inputValue) || cardBody.includes(inputValue)) {
           element.style.display = "block";
@@ -66,7 +65,7 @@ function runSearch() {
   });
 }
 
-//helper function
+//helper functions
 
 function getNotesFromLocal() {
   let notes = localStorage.getItem("notes");
@@ -87,7 +86,7 @@ function cardHtml(index, element) {
                    
                 </div>
                         <hr>
-                        <p class="card-text"> ${parseMd(element.body)}</p>
+                        <div class="card-text" id="note_body" >  ${parseMd(element.body)}</div>
                        
                     </div>
                 </div>`;
