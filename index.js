@@ -2,6 +2,7 @@ showAllNotes();
 
 let boldBtn = document.getElementById("bold_button");
 
+//better way - https://stackoverflow.com/a/28663818
 boldBtn.addEventListener("click", function () {
   let NotesBody = document.getElementById("notesBody");
 
@@ -13,7 +14,12 @@ boldBtn.addEventListener("click", function () {
     NotesBody.value.length
   );
   if (selectedText == null || selectedText == undefined || selectedText == "") {
-    NotesBody.value = " **" + document.getElementById("notesBody").value + "**";
+      NotesBody.value = " **" + document.getElementById("notesBody").value + "**";
+      if(document.activeElement!=NotesBody){
+        NotesBody.focus()
+        NotesBody.selectionStart=3
+        NotesBody.selectionEnd=3
+      }
     return;
   }
   if (location == 0) {
@@ -39,6 +45,11 @@ underLineBtn.addEventListener("click", function () {
   );
   if (selectedText == null || selectedText == undefined || selectedText == "") {
     NotesBody.value = "--" + document.getElementById("notesBody").value + "--";
+    if(document.activeElement!=NotesBody){
+        NotesBody.focus()
+        NotesBody.selectionStart=2
+        NotesBody.selectionEnd=2
+      }
     return;
   }
 
@@ -66,9 +77,13 @@ addBtn.addEventListener("click", function (e) {
 function showAllNotes() {
   getNotesFromLocal();
   let allCards = "";
-  mainNotesArray.forEach(function (element, i) {
+  // mainNotesArray.forEach(function (element, i) {
+  //   allCards += cardHtml(i, element);
+  // });
+  for (let i = 0; i < mainNotesArray.length; i++) {
+    const element = mainNotesArray[i];
     allCards += cardHtml(i, element);
-  });
+  }
   let notesContainer = document.getElementById("notes");
   if (mainNotesArray.length != 0) {
     notesContainer.innerHTML = allCards;
@@ -131,9 +146,10 @@ function cardHtml(index, element) {
     '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M20 4h-20v-2h5.711c.9 0 1.631-1.099 1.631-2h5.316c0 .901.73 2 1.631 2h5.711v2zm-7 15.5c0-1.267.37-2.447 1-3.448v-6.052c0-.552.447-1 1-1s1 .448 1 1v4.032c.879-.565 1.901-.922 3-1.006v-7.026h-18v18h13.82c-1.124-1.169-1.82-2.753-1.82-4.5zm-7 .5c0 .552-.447 1-1 1s-1-.448-1-1v-10c0-.552.447-1 1-1s1 .448 1 1v10zm5 0c0 .552-.447 1-1 1s-1-.448-1-1v-10c0-.552.447-1 1-1s1 .448 1 1v10zm13-.5c0 2.485-2.017 4.5-4.5 4.5s-4.5-2.015-4.5-4.5 2.017-4.5 4.5-4.5 4.5 2.015 4.5 4.5zm-3.086-2.122l-1.414 1.414-1.414-1.414-.707.708 1.414 1.414-1.414 1.414.707.708 1.414-1.414 1.414 1.414.708-.708-1.414-1.414 1.414-1.414-.708-.708z"/></svg>';
 
   let limit = 150;
-  let truncatedNotesBody = parseMd(element.body).slice(0, limit) + ".....";
-  return `
-                  <div class="noteCard my-2 mx-2 card" style="width: 18rem">
+  let truncatedNotesBody = element.body.slice(0, limit) + ".....";
+  truncatedNotesBody=parseMd(truncatedNotesBody)
+  let mdParsed = parseMd(element.body)
+  return ` <div class="noteCard my-2 mx-2 card" style="width: 18rem">
                   <div class="card-body">
                     <div class="title_row">
                       <h5 class="card-title">${
@@ -148,13 +164,12 @@ function cardHtml(index, element) {
                       ${
                         parseMd(element.body).length > limit
                           ? truncatedNotesBody
-                          : parseMd(element.body)
+                          : mdParsed
                       }
                     </div>
-
+                    <a href="note.html?id=${index}" class="btn btn-outline-primary" role="button">Go to note</a>
                   </div>
-                </div>
-                `;
+                </div> `;
 }
 
 function removeTags(str) {

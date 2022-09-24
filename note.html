@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="style.css" />
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title> </title>
+
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.1/css/fontawesome.min.css"
+    />
+    <link rel="stylesheet" href="note.css" />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <a class="navbar-brand" href="./">⬅️ all notes</a>
+    </nav>
+
+    <div id="main_note_div">
+      <div class="alert alert-info mobile_only" role="alert">
+        Markdown preview can only be viewed on pc or landscape mode!!!
+      </div>
+      <div class="note_div">
+        <div class="left_half">
+          <h1 > <input id="note_title" type="text"> </h1>
+          <div class="input-output">
+            <textarea id="input-area" rows="30" cols="50"></textarea>
+          </div>
+        </div>
+        <div class="right_half">
+          <h1 id="note_preview_title">title Preview</h1>
+          <div class="input-output">
+            <div id="output-area"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="note.js"></script>
+  </body>
+</html>
+
+
