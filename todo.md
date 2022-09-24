@@ -7,3 +7,4 @@
 - [ ] bold underline button in notes page
 - [ ] copy button ☠️
 - [ ] pressing bold bolds everything 
+- [ ] dark mode 😳
