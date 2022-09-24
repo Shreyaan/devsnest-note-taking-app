@@ -1,6 +1,6 @@
 showAllNotes();
 
-boldBtn = document.getElementById("bold_button");
+let boldBtn = document.getElementById("bold_button");
 
 boldBtn.addEventListener("click", function () {
   let NotesBody = document.getElementById("notesBody");
@@ -13,16 +13,37 @@ boldBtn.addEventListener("click", function () {
     NotesBody.value.length
   );
   if (selectedText == null || selectedText == undefined || selectedText == "") {
-    NotesBody.value = " **" + document.getElementById("notesBody").value +'**'
-    return
+    NotesBody.value = " **" + document.getElementById("notesBody").value + "**";
+    return;
   }
-  if (location == 0 ) {
+  if (location == 0) {
     NotesBody.value =
       startingString + " **" + selectedText + "**" + endingString;
   } else {
     NotesBody.value =
       startingString + "**" + selectedText + "**" + endingString;
   }
+});
+
+let underLineBtn = document.getElementById("underline_button");
+
+underLineBtn.addEventListener("click", function () {
+  let NotesBody = document.getElementById("notesBody");
+
+  let selectedText = window.getSelection().toString();
+  let location = NotesBody.value.indexOf(selectedText);
+  let startingString = NotesBody.value.slice(0, location);
+  let endingString = NotesBody.value.slice(
+    selectedText.length + startingString.length,
+    NotesBody.value.length
+  );
+  if (selectedText == null || selectedText == undefined || selectedText == "") {
+    NotesBody.value = "--" + document.getElementById("notesBody").value + "--";
+    return;
+  }
+
+  NotesBody.value =
+    startingString + "--" + selectedText + "--" + endingString;
 });
 
 let addBtn = document.getElementById("addBtn");
@@ -149,6 +170,8 @@ function removeTags(str) {
 
 //https://codepen.io/kvendrik/pen/bGKeEE
 function parseMd(md) {
+    //underline
+    md = md.replace(/[\-\_]{2}([^\-\_]+)[\-\_]{2}/g, "<u>$1</u>");
   //ul
   md = md.replace(/^\s*\n\*/gm, "<ul>\n*");
   md = md.replace(/^(\*.+)\s*\n([^\*])/gm, "$1\n</ul>\n\n$2");
