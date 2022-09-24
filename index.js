@@ -4,17 +4,25 @@ boldBtn = document.getElementById("bold_button");
 
 boldBtn.addEventListener("click", function () {
   let NotesBody = document.getElementById("notesBody");
+
   let selectedText = window.getSelection().toString();
   let location = NotesBody.value.indexOf(selectedText);
   let startingString = NotesBody.value.slice(0, location);
   let endingString = NotesBody.value.slice(
-    selectedText.length+ startingString.length,
-    NotesBody.value.length - 1
+    selectedText.length + startingString.length,
+    NotesBody.value.length
   );
-
-  NotesBody.value =
-    startingString + "**" + selectedText + "**" + endingString;
-  console.log(text);
+  if (selectedText == null || selectedText == undefined || selectedText == "") {
+    NotesBody.value = " **" + document.getElementById("notesBody").value +'**'
+    return
+  }
+  if (location == 0 ) {
+    NotesBody.value =
+      startingString + " **" + selectedText + "**" + endingString;
+  } else {
+    NotesBody.value =
+      startingString + "**" + selectedText + "**" + endingString;
+  }
 });
 
 let addBtn = document.getElementById("addBtn");
