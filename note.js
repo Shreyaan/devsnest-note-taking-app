@@ -2,6 +2,12 @@ const urlSearchParams = new URLSearchParams(window.location.search);
 const params = Object.fromEntries(urlSearchParams.entries());
 
 let mainDiv = document.getElementById("main_note_div");
+
+if (localStorage.getItem("notes") == null||undefined ||params.id== null||undefined) {
+    mainDiv.innerHTML = `  <div class="error"><h3>No Notes exist. Please add them from the  <a href="./">main page</h3></div></a>`;
+    throw new Error("this note isnt available 🙁");
+  }
+
 let note = getNoteFromLocal();
 
 function getNoteFromLocal() {
