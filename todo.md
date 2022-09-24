@@ -4,3 +4,5 @@
 - [ ] buttons mein margin aur padding 
 - [ ] notes preview should work on mobile too
 - [ ] bg lagana hai 
+- [ ] bold underline button in notes page
+- [ ] copy button ☠️
