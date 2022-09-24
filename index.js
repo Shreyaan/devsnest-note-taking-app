@@ -6,7 +6,11 @@ addBtn.addEventListener("click", function (e) {
   let NotesBody = document.getElementById("notesBody");
   let NotesTitle = document.getElementById("notesTitle");
   getNotesFromLocal();
-  mainNotesArray.push({ title: NotesTitle.value, body: NotesBody.value });
+  noteObj = {
+    title: NotesTitle.value,
+    body: removeTags(NotesBody.value),
+  };
+  mainNotesArray.push(noteObj);
   localStorage.setItem("notes", JSON.stringify(mainNotesArray));
   NotesBody.value = "";
   NotesTitle.value = "";
@@ -86,7 +90,9 @@ function cardHtml(index, element) {
                   <div class="noteCard my-2 mx-2 card" style="width: 18rem">
                   <div class="card-body">
                     <div class="title_row">
-                      <h5 class="card-title">${element.title ? element.title : "Untitled"}</h5>
+                      <h5 class="card-title">${
+                        element.title ? element.title : "Untitled"
+                      }</h5>
                       <button id="${index}" onclick="deleteNote(this.id)" class="btn btn-outline-danger trash">
                         ${svgIcon}
                       </button>
@@ -103,6 +109,14 @@ function cardHtml(index, element) {
                   </div>
                 </div>
                 `;
+}
+
+function removeTags(str) {
+  if (str === null || str === "") return false;
+  else str = str.toString();
+  let newStr = str.replace(/(<([^>]+)>)/gi, "")
+  if(newStr!=str) newStr= "<small><i>*html tags has been removed from this note</i> <br></small>" + newStr 
+  return newStr;
 }
 
 //https://codepen.io/kvendrik/pen/bGKeEE
