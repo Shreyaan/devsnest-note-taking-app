@@ -1,0 +1,38 @@
+* {
+  margin: 0;
+  padding: 0;
+  font-family: "Ubuntu", sans-serif;
+}
+
+body {
+  background-color: #00e073;
+  color: #010409;
+  /* display: flex; */
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 100%;
+}
+
+#writer{
+  width: 0ch;
+  overflow: hidden;
+  white-space: nowrap;
+  animation: text 6s infinite;
+  /* animation: ; */
+  
+  font-size: 35px;
+  
+}
+
+
+
+@keyframes text{
+  0%{
+    width:0ch;
+  }
+  50%{
+    width:22ch;
+  }
+  
+}
