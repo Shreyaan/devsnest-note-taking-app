@@ -12,11 +12,12 @@
 }
 
 .trash{
-    border: 2px solid rgba(248, 0, 0, 0.579) !important;
+    /* border: 2px solid rgba(248, 0, 0, 0) !important; */
     transition: all .2s ease !important;
 }
 .trash:hover {
-    transform: scale(1.05) !important;
+    /* border: 2px solid rgba(248, 0, 0, 0.579) !important; */
+    transform: scale(1.2) !important;
 }
 
 @media screen and (min-width: 900px) {
