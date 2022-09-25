@@ -104,6 +104,10 @@ nav {
   margin-bottom: 2px;
 }
 
+.important_note_ta{
+  border: 2px solid rgba(255, 0, 0, 0.467) !important;
+}
+
 #snackbar {
   visibility: hidden;
   min-width: 250px;
