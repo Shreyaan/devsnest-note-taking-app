@@ -140,7 +140,27 @@ function runSearch() {
   });
 }
 
+
+function copyFunc(id) {
+  getNotesFromLocal();
+   let copyText = mainNotesArray[id]
+   let title
+   let body =copyText.body
+   if(copyText.title==null|| copyText.title== undefined||copyText.title== '') title = "Untitled"
+   else title = copyText.title
+
+   if(copyText.body == false) body = ""
+   navigator.clipboard.writeText(title + '\n' + body);
+    showSnackBar(title + " " + "Note copied!!")
+ }
+
 //helper functions
+
+function showSnackBar(msg) {
+  let snackbar = document.getElementById("snackbar");
+  snackbar.innerHTML = msg
+  snackbar.className = "show";
+  setTimeout(function(){ snackbar.className = snackbar.className.replace("show", ""); }, 1500)}
 
 function getNotesFromLocal() {
   let notes = localStorage.getItem("notes");
@@ -167,22 +187,24 @@ function cardHtml(index, element) {
     BodyText = parseMd(element.body);
   } else BodyText = "";
   return ` <div class="noteCard my-2 mx-2 card" style="width: 18rem">
-                  <div class="card-body">
-                    <div class="title_row">
-                      <h5 class="card-title">${
-                        element.title ? element.title : "Untitled"
-                      }</h5>
-                      <button id="${index}" onclick="deleteNote(this.id)" class="btn btn-outline-danger trash">
-                        ${svgIcon}
-                      </button>
-                    </div>
-                    <hr />
-                    <div class="card-text" id="note_body">
-                      ${BodyText}
-                    </div>
-                    <a href="note.html?id=${index}" class="btn btn-outline-primary" role="button">Go to note</a>
-                  </div>
-                </div> `;
+<div class="card-body">
+  <div class="title_row">
+    <h5 class="card-title">${
+      element.title ? element.title : "Untitled"
+    }</h5>
+   <div class="note_button">
+   <button class="btn btn-outline-success trash " onclick="copyFunc(${index})"> 📋</button>
+   <button id="${index}" onclick="deleteNote(this.id)" class="btn btn-outline-danger trash">
+     🗑
+   </button></div>
+  </div>
+  <hr />
+  <div class="card-text" id="note_body">
+    ${BodyText}
+  </div>
+  <a href="note.html?id=${index}" class="btn btn-outline-primary" role="button">Go to note</a>
+</div>
+</div> `;
 }
 
 function removeTags(str) {
