@@ -5,6 +5,10 @@ if (localStorage.getItem("notes") == null || undefined) {
   };
   let mainNotesArray = [];
   mainNotesArray.push(noteObj);
+  mainNotesArray.push({ title: "",
+  body: 'note 2',});
+  mainNotesArray.push({ title: "note 3",
+  body: '',});
   localStorage.setItem("notes", JSON.stringify(mainNotesArray));
 }
 
