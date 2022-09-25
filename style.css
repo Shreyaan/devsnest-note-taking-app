@@ -112,6 +112,10 @@ nav {
   animation: fadein 0.5s, fadeout 0.5s 1s;
 }
 
+#notesBody{
+  margin-bottom: 10px;
+}
+
 @-webkit-keyframes fadein {
   from {
     bottom: 0;
