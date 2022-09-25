@@ -62,25 +62,14 @@
 }
 
 #note_preview_title {
-  margin-bottom: 15px;
+  margin-bottom: 30px;
 }
 #note_title {
   margin-bottom: 16px;
   max-width: 40vw;
 }
-.mobile_only {
-  display: none;
-}
-
-#output-area * {
-  margin: 0px 0px;
-}
-#output-area h1 {
-  text-align: left !important;
-}
-
-pre {
-  line-height: normal;
+.mobile_only{
+    display: none;
 }
 
 @media screen and (max-width: 700px) {
@@ -91,16 +80,16 @@ pre {
   #input-area {
     max-width: 100vw !important;
   }
-  #note_title {
+  #note_title{
     max-width: 80vw;
   }
-  .mobile_only {
+  .mobile_only{
     display: block;
   }
 }
- nav{
-  background-color: #077bff ;
- }
+nav{
+  background-color: #077bff;
+}
  .navbar-brand{
   color: black;
  }
