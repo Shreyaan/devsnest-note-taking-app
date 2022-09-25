@@ -5,10 +5,8 @@ if (localStorage.getItem("notes") == null || undefined) {
   };
   let mainNotesArray = [];
   mainNotesArray.push(noteObj);
-  mainNotesArray.push({ title: "",
-  body: 'note 2',});
-  mainNotesArray.push({ title: "note 3",
-  body: '',});
+  mainNotesArray.push({ title: "", body: "note 2" });
+  mainNotesArray.push({ title: "note 3", body: "" });
   localStorage.setItem("notes", JSON.stringify(mainNotesArray));
 }
 
@@ -28,10 +26,10 @@ boldBtn.addEventListener("click", function () {
     NotesBody.value.length
   );
   if (selectedText == null || selectedText == undefined || selectedText == "") {
-      NotesBody.value += " **" +  'Bold text' + "**"
-      NotesBody.focus();
-      NotesBody.selectionStart= NotesBody.value.length-11
-      NotesBody.selectionEnd= NotesBody.value.length-2
+    NotesBody.value += " **" + "Bold text" + "**";
+    NotesBody.focus();
+    NotesBody.selectionStart = NotesBody.value.length - 11;
+    NotesBody.selectionEnd = NotesBody.value.length - 2;
     // }
     return;
   }
@@ -57,10 +55,10 @@ underLineBtn.addEventListener("click", function () {
     NotesBody.value.length
   );
   if (selectedText == null || selectedText == undefined || selectedText == "") {
-    NotesBody.value += " --" +  'underline text' + "--"
+    NotesBody.value += " --" + "underline text" + "--";
     NotesBody.focus();
-    NotesBody.selectionStart= NotesBody.value.length-16
-    NotesBody.selectionEnd= NotesBody.value.length-2
+    NotesBody.selectionStart = NotesBody.value.length - 16;
+    NotesBody.selectionEnd = NotesBody.value.length - 2;
     return;
   }
 
@@ -122,8 +120,12 @@ function runSearch() {
       didItRan = true;
 
       Array.from(noteCardsArray).forEach(function (element) {
-        let cardBody = element.querySelectorAll("#note_body")[0].innerHTML.toLowerCase();
-        let cardTitle = element.getElementsByTagName("h5")[0].innerText.toLowerCase();
+        let cardBody = element
+          .querySelectorAll("#note_body")[0]
+          .innerHTML.toLowerCase();
+        let cardTitle = element
+          .getElementsByTagName("h5")[0]
+          .innerText.toLowerCase();
         if (cardTitle.includes(inputValue) || cardBody.includes(inputValue)) {
           element.style.display = "block";
         } else {
@@ -140,27 +142,34 @@ function runSearch() {
   });
 }
 
-
 function copyFunc(id) {
   getNotesFromLocal();
-   let copyText = mainNotesArray[id]
-   let title
-   let body =copyText.body
-   if(copyText.title==null|| copyText.title== undefined||copyText.title== '') title = "Untitled"
-   else title = copyText.title
+  let copyText = mainNotesArray[id];
+  let title;
+  let body = copyText.body;
+  if (
+    copyText.title == null ||
+    copyText.title == undefined ||
+    copyText.title == ""
+  )
+    title = "Untitled";
+  else title = copyText.title;
 
-   if(copyText.body == false) body = ""
-   navigator.clipboard.writeText(title + '\n' + body);
-    showSnackBar(title + " " + "Note copied!!")
- }
+  if (copyText.body == false) body = "";
+  navigator.clipboard.writeText(title + "\n" + body);
+  showSnackBar(title + " " + "Note copied!!");
+}
 
 //helper functions
 
 function showSnackBar(msg) {
   let snackbar = document.getElementById("snackbar");
-  snackbar.innerHTML = msg
+  snackbar.innerHTML = msg;
   snackbar.className = "show";
-  setTimeout(function(){ snackbar.className = snackbar.className.replace("show", ""); }, 1500)}
+  setTimeout(function () {
+    snackbar.className = snackbar.className.replace("show", "");
+  }, 1500);
+}
 
 function getNotesFromLocal() {
   let notes = localStorage.getItem("notes");
@@ -172,8 +181,6 @@ function getNotesFromLocal() {
 }
 
 function cardHtml(index, element) {
-  let svgIcon =
-    '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M20 4h-20v-2h5.711c.9 0 1.631-1.099 1.631-2h5.316c0 .901.73 2 1.631 2h5.711v2zm-7 15.5c0-1.267.37-2.447 1-3.448v-6.052c0-.552.447-1 1-1s1 .448 1 1v4.032c.879-.565 1.901-.922 3-1.006v-7.026h-18v18h13.82c-1.124-1.169-1.82-2.753-1.82-4.5zm-7 .5c0 .552-.447 1-1 1s-1-.448-1-1v-10c0-.552.447-1 1-1s1 .448 1 1v10zm5 0c0 .552-.447 1-1 1s-1-.448-1-1v-10c0-.552.447-1 1-1s1 .448 1 1v10zm13-.5c0 2.485-2.017 4.5-4.5 4.5s-4.5-2.015-4.5-4.5 2.017-4.5 4.5-4.5 4.5 2.015 4.5 4.5zm-3.086-2.122l-1.414 1.414-1.414-1.414-.707.708 1.414 1.414-1.414 1.414.707.708 1.414-1.414 1.414 1.414.708-.708-1.414-1.414 1.414-1.414-.708-.708z"/></svg>';
 
   let limit = 100;
   let truncatedNotesBody;
@@ -182,20 +189,17 @@ function cardHtml(index, element) {
     truncatedNotesBody = element.body.slice(0, limit) + ".....";
     truncatedNotesBody = parseMd(truncatedNotesBody);
     BodyText = truncatedNotesBody;
-  }
- else if (element.body.length > 0) {
+  } else if (element.body.length > 0) {
     BodyText = parseMd(element.body);
   } else BodyText = "";
   return ` <div class="noteCard my-2 mx-2 card" style="width: 18rem">
 <div class="card-body">
   <div class="title_row">
-    <h5 class="card-title">${
-      element.title ? element.title : "Untitled"
-    }</h5>
+    <h5 class="card-title">${element.title ? element.title : "Untitled"}</h5>
    <div class="note_button">
-   <button class="btn btn-outline-success trash " onclick="copyFunc(${index})"> 📋</button>
-   <button id="${index}" onclick="deleteNote(this.id)" class="btn btn-outline-danger trash">
-     🗑
+   <button class="btn btn-success trash " onclick="copyFunc(${index})">  ${svgIcons("copy")}</button>
+   <button id="${index}" onclick="deleteNote(this.id)" class="btn btn-danger trash">
+     ${svgIcons("trash")}
    </button></div>
   </div>
   <hr />
@@ -332,4 +336,24 @@ _You **can** combine them_
 >> Markdown is often used to format readme files, for writing messages in online discussion forums, and to create rich text using a plain text editor.
 
   `;
+}
+
+function svgIcons(icon) {
+  switch (icon) {
+    case "trash": {
+      icon = `<img alt="🗑" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHg9IjBweCIgeT0iMHB4Igp3aWR0aD0iMjYiIGhlaWdodD0iMjYiCnZpZXdCb3g9IjAgMCAyNiAyNiIKc3R5bGU9IiBmaWxsOiMwMDAwMDA7Ij48cGF0aCBkPSJNIDExIC0wLjAzMTI1IEMgMTAuMTY0MDYzIC0wLjAzMTI1IDkuMzQzNzUgMC4xMzI4MTMgOC43NSAwLjcxODc1IEMgOC4xNTYyNSAxLjMwNDY4OCA3Ljk2ODc1IDIuMTM2NzE5IDcuOTY4NzUgMyBMIDQgMyBDIDMuNDQ5MjE5IDMgMyAzLjQ0OTIxOSAzIDQgTCAyIDQgTCAyIDYgTCAyNCA2IEwgMjQgNCBMIDIzIDQgQyAyMyAzLjQ0OTIxOSAyMi41NTA3ODEgMyAyMiAzIEwgMTguMDMxMjUgMyBDIDE4LjAzMTI1IDIuMTM2NzE5IDE3Ljg0Mzc1IDEuMzA0Njg4IDE3LjI1IDAuNzE4NzUgQyAxNi42NTYyNSAwLjEzMjgxMyAxNS44MzU5MzggLTAuMDMxMjUgMTUgLTAuMDMxMjUgWiBNIDExIDIuMDMxMjUgTCAxNSAyLjAzMTI1IEMgMTUuNTQ2ODc1IDIuMDMxMjUgMTUuNzE4NzUgMi4xNjAxNTYgMTUuNzgxMjUgMi4yMTg3NSBDIDE1Ljg0Mzc1IDIuMjc3MzQ0IDE1Ljk2ODc1IDIuNDQxNDA2IDE1Ljk2ODc1IDMgTCAxMC4wMzEyNSAzIEMgMTAuMDMxMjUgMi40NDE0MDYgMTAuMTU2MjUgMi4yNzczNDQgMTAuMjE4NzUgMi4yMTg3NSBDIDEwLjI4MTI1IDIuMTYwMTU2IDEwLjQ1MzEyNSAyLjAzMTI1IDExIDIuMDMxMjUgWiBNIDQgNyBMIDQgMjMgQyA0IDI0LjY1MjM0NCA1LjM0NzY1NiAyNiA3IDI2IEwgMTkgMjYgQyAyMC42NTIzNDQgMjYgMjIgMjQuNjUyMzQ0IDIyIDIzIEwgMjIgNyBaIE0gOCAxMCBMIDEwIDEwIEwgMTAgMjIgTCA4IDIyIFogTSAxMiAxMCBMIDE0IDEwIEwgMTQgMjIgTCAxMiAyMiBaIE0gMTYgMTAgTCAxOCAxMCBMIDE4IDIyIEwgMTYgMjIgWiI+PC9wYXRoPjwvc3ZnPg=="/>`;
+      break;
+    }
+
+    case "copy": {
+      icon = `<img alt="📋" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABoAAAAaCAYAAACpSkzOAAAABmJLR0QA/wD/AP+gvaeTAAABGUlEQVRIibWUPQoCMRBGn2Ih2AoWrqUewN4TeABB8BxWdnaCB/GnEz2A11DwAharB1iLjRDXiZnsxoFhF5Jv3kz4EsgjAbbAA8gKeQOmRIgEuAuAYs6rgram0AHoCusjC7asAnofV+JYb/I52bos6F3At+cCTID2P0FXoENF02hAQyKYRgOCCKYpgqQuIYJptCCtaexc/QL5ioSAMmDhKlBlorNDP4sNsqMFjI3mVrPENY+wuM8H/djX+FFQEpUOCaSNILgE0hZwHZ2orwNP8++6iNFiT97d0QMLdd2XboD/sZRAvsdVbDABNkD6L1CIc7T3TdTVAwRlTNMz3zRAozaNDTkZzS4EpDGNlHegHwICv2nsTM0kfYAXoXXQ8XYfZLoAAAAASUVORK5CYII=">`;
+      break;
+    }
+    case "trash2": {
+      icon =
+        '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M20 4h-20v-2h5.711c.9 0 1.631-1.099 1.631-2h5.316c0 .901.73 2 1.631 2h5.711v2zm-7 15.5c0-1.267.37-2.447 1-3.448v-6.052c0-.552.447-1 1-1s1 .448 1 1v4.032c.879-.565 1.901-.922 3-1.006v-7.026h-18v18h13.82c-1.124-1.169-1.82-2.753-1.82-4.5zm-7 .5c0 .552-.447 1-1 1s-1-.448-1-1v-10c0-.552.447-1 1-1s1 .448 1 1v10zm5 0c0 .552-.447 1-1 1s-1-.448-1-1v-10c0-.552.447-1 1-1s1 .448 1 1v10zm13-.5c0 2.485-2.017 4.5-4.5 4.5s-4.5-2.015-4.5-4.5 2.017-4.5 4.5-4.5 4.5 2.015 4.5 4.5zm-3.086-2.122l-1.414 1.414-1.414-1.414-.707.708 1.414 1.414-1.414 1.414.707.708 1.414-1.414 1.414 1.414.708-.708-1.414-1.414 1.414-1.414-.708-.708z"/></svg>';
+      break;
+    }
+  }
+  return icon;
 }

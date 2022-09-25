@@ -71,6 +71,10 @@ margin-left: 0px;
   font-size: 1.15rem !important;
   /* border: none !important; */
 }
+.note_button *{
+  font-size: 1.15rem !important;
+  /* border: none !important; */
+}
 
 
 
@@ -115,3 +119,15 @@ margin-left: 0px;
   from {bottom: 30px; opacity: 1;}
   to {bottom: 0; opacity: 0;}
 }
+
+.btn-danger {
+  color: #fff;
+  background-color: #ff5b6b !important;
+  border-color: #ff6372 !important;
+}
+.btn-success {
+  color: #fff;
+  background-color: #52d570 !important;
+  border-color: #52d570 !important;
+}
+
