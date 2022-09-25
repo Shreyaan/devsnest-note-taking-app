@@ -19,7 +19,7 @@
   border-left: 4px solid black !important;
 }
 
-.left_half h1,
+.left_half ,
 .right_half h1 {
   text-align: center;
 }
@@ -59,6 +59,12 @@
   max-width: 50vw;
   max-height: 100vh;
   word-break: break-all;
+}
+
+#output-area *{
+  line-height: 1 !important;
+  text-align: left;
+  color: #077bff;
 }
 
 #note_preview_title {
@@ -102,6 +108,10 @@ nav {
 
 #btn_row {
   margin-bottom: 2px;
+}
+
+.important_note_ta{
+  border: 2px solid rgba(255, 0, 0, 0.467) !important ;
 }
 
 #snackbar {

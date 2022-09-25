@@ -42,6 +42,11 @@ if (note.title) {
 inputArea.value = note.body;
 outputArea.innerHTML = parseMd(inputArea.value);
 
+if(note.important==true){
+  inputArea.classList.add("important_note_ta");
+
+}
+
 inputArea.addEventListener("input", () => handleBodyInput());
 
 function handleBodyInput() {
