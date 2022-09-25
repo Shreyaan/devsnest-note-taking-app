@@ -21,7 +21,7 @@
   transform: scale(1.1) !important;
 }
 
-#btn_row {
+#btn_row *{
   margin-bottom: 7px;
 }
 
