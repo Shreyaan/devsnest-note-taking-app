@@ -1,3 +1,13 @@
+if (localStorage.getItem("notes") == null || undefined) {
+  noteObj = {
+    title: "Markdown Preview",
+    body: MarkdownPreview(),
+  };
+  let mainNotesArray = [];
+  mainNotesArray.push(noteObj);
+  localStorage.setItem("notes", JSON.stringify(mainNotesArray));
+}
+
 showAllNotes();
 
 let boldBtn = document.getElementById("bold_button");
@@ -14,12 +24,12 @@ boldBtn.addEventListener("click", function () {
     NotesBody.value.length
   );
   if (selectedText == null || selectedText == undefined || selectedText == "") {
-      NotesBody.value = " **" + document.getElementById("notesBody").value + "**";
-      if(document.activeElement!=NotesBody){
-        NotesBody.focus()
-        NotesBody.selectionStart=3
-        NotesBody.selectionEnd=3
-      }
+    NotesBody.value = " **" + document.getElementById("notesBody").value + "**";
+    if (document.activeElement != NotesBody) {
+      NotesBody.focus();
+      NotesBody.selectionStart = 3;
+      NotesBody.selectionEnd = 3;
+    }
     return;
   }
   if (location == 0) {
@@ -45,16 +55,15 @@ underLineBtn.addEventListener("click", function () {
   );
   if (selectedText == null || selectedText == undefined || selectedText == "") {
     NotesBody.value = "--" + document.getElementById("notesBody").value + "--";
-    if(document.activeElement!=NotesBody){
-        NotesBody.focus()
-        NotesBody.selectionStart=2
-        NotesBody.selectionEnd=2
-      }
+    if (document.activeElement != NotesBody) {
+      NotesBody.focus();
+      NotesBody.selectionStart = 2;
+      NotesBody.selectionEnd = 2;
+    }
     return;
   }
 
-  NotesBody.value =
-    startingString + "--" + selectedText + "--" + endingString;
+  NotesBody.value = startingString + "--" + selectedText + "--" + endingString;
 });
 
 let addBtn = document.getElementById("addBtn");
@@ -112,8 +121,8 @@ function runSearch() {
       didItRan = true;
 
       Array.from(noteCardsArray).forEach(function (element) {
-        let cardBody = element.querySelectorAll("#note_body")[0].innerText;
-        let cardTitle = element.getElementsByTagName("h5")[0].innerText;
+        let cardBody = element.querySelectorAll("#note_body")[0].innerHTML.toLowerCase();
+        let cardTitle = element.getElementsByTagName("h5")[0].innerText.toLowerCase();
         if (cardTitle.includes(inputValue) || cardBody.includes(inputValue)) {
           element.style.display = "block";
         } else {
@@ -145,10 +154,17 @@ function cardHtml(index, element) {
   let svgIcon =
     '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M20 4h-20v-2h5.711c.9 0 1.631-1.099 1.631-2h5.316c0 .901.73 2 1.631 2h5.711v2zm-7 15.5c0-1.267.37-2.447 1-3.448v-6.052c0-.552.447-1 1-1s1 .448 1 1v4.032c.879-.565 1.901-.922 3-1.006v-7.026h-18v18h13.82c-1.124-1.169-1.82-2.753-1.82-4.5zm-7 .5c0 .552-.447 1-1 1s-1-.448-1-1v-10c0-.552.447-1 1-1s1 .448 1 1v10zm5 0c0 .552-.447 1-1 1s-1-.448-1-1v-10c0-.552.447-1 1-1s1 .448 1 1v10zm13-.5c0 2.485-2.017 4.5-4.5 4.5s-4.5-2.015-4.5-4.5 2.017-4.5 4.5-4.5 4.5 2.015 4.5 4.5zm-3.086-2.122l-1.414 1.414-1.414-1.414-.707.708 1.414 1.414-1.414 1.414.707.708 1.414-1.414 1.414 1.414.708-.708-1.414-1.414 1.414-1.414-.708-.708z"/></svg>';
 
-  let limit = 150;
-  let truncatedNotesBody = element.body.slice(0, limit) + ".....";
-  truncatedNotesBody=parseMd(truncatedNotesBody)
-  let mdParsed = parseMd(element.body)
+  let limit = 100;
+  let truncatedNotesBody;
+  let BodyText;
+  if (element.body.length >= limit) {
+    truncatedNotesBody = element.body.slice(0, limit) + ".....";
+    truncatedNotesBody = parseMd(truncatedNotesBody);
+    BodyText = truncatedNotesBody;
+  }
+ else if (element.body.length > 0) {
+    BodyText = parseMd(element.body);
+  } else BodyText = "";
   return ` <div class="noteCard my-2 mx-2 card" style="width: 18rem">
                   <div class="card-body">
                     <div class="title_row">
@@ -161,11 +177,7 @@ function cardHtml(index, element) {
                     </div>
                     <hr />
                     <div class="card-text" id="note_body">
-                      ${
-                        parseMd(element.body).length > limit
-                          ? truncatedNotesBody
-                          : mdParsed
-                      }
+                      ${BodyText}
                     </div>
                     <a href="note.html?id=${index}" class="btn btn-outline-primary" role="button">Go to note</a>
                   </div>
@@ -185,8 +197,8 @@ function removeTags(str) {
 
 //https://codepen.io/kvendrik/pen/bGKeEE
 function parseMd(md) {
-    //underline
-    md = md.replace(/[\-\_]{2}([^\-\_]+)[\-\_]{2}/g, "<u>$1</u>");
+  //underline
+  md = md.replace(/[\-\_]{2}([^\-\_]+)[\-\_]{2}/g, "<u>$1</u>");
   //ul
   md = md.replace(/^\s*\n\*/gm, "<ul>\n*");
   md = md.replace(/^(\*.+)\s*\n([^\*])/gm, "$1\n</ul>\n\n$2");
@@ -244,4 +256,57 @@ function parseMd(md) {
   md = md.replace(/(\<pre.+\>)\s*\n\<p\>(.+)\<\/p\>/gm, "$1$2");
 
   return md;
+}
+
+function MarkdownPreview() {
+  return `
+  # Markdown syntax guide
+
+## Headers 
+ 
+# This is a Heading h1
+## This is a Heading h2 
+###### This is a Heading h6
+
+## Emphasis
+
+*This text will be italic*  
+_This will also be italic_
+
+**This text will be bold**  
+__This will also be bold__
+
+_You **can** combine them_
+
+## Lists
+
+### Unordered
+
+* Item 1
+* Item 2
+* Item 2a
+* Item 2b
+
+### Ordered
+
+1. Item 1
+1. Item 2
+1. Item 3
+  1. Item 3a
+  1. Item 3b
+
+## Images
+
+![This is an alt text.](https://picsum.photos/200/300 "This is a sample image.")
+
+## Links
+[Go back to main page](./)
+
+## Blockquotes
+
+> Markdown is a lightweight markup language with plain-text-formatting syntax, created in 2004 by John Gruber with Aaron Swartz.
+>
+>> Markdown is often used to format readme files, for writing messages in online discussion forums, and to create rich text using a plain text editor.
+
+  `;
 }

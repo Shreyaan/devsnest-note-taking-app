@@ -5,7 +5,8 @@
 }
 .title_row h5 {
   display: inline;
-  width: min-content;
+  width: fit-content;
+  max-width: 160px;
 }
 .title_row button {
   height: min-content;
@@ -18,6 +19,10 @@
 .trash:hover {
     /* border: 2px solid rgba(248, 0, 0, 0.579) !important; */
     transform: scale(1.2) !important;
+}
+
+#btn_row{
+  margin-bottom: 1px;
 }
 
 @media screen and (min-width: 900px) {

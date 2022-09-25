@@ -15,10 +15,9 @@ body {
 }
 
 #writer{
-  width: 0ch;
   overflow: hidden;
-  white-space: nowrap;
-  animation: text 6s infinite;
+  /* white-space: nowrap; */
+  animation: text 2s forwards;
   /* animation: ; */
   
   font-size: 35px;
@@ -29,10 +28,10 @@ body {
 
 @keyframes text{
   0%{
-    width:0ch;
+    opacity:0%;
   }
-  50%{
-    width:26ch;
+  100%{
+    opacity: 100%;
   }
   
 }
