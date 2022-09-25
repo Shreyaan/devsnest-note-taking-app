@@ -193,8 +193,8 @@ function cardHtml(index, element) {
       element.title ? element.title : "Untitled"
     }</h5>
    <div class="note_button">
-   <button class="btn btn-outline-success trash " onclick="copyFunc(${index})"> 📋</button>
-   <button id="${index}" onclick="deleteNote(this.id)" class="btn btn-outline-danger trash">
+   <button class="btn btn-success trash " onclick="copyFunc(${index})"> 📋</button>
+   <button id="${index}" onclick="deleteNote(this.id)" class="btn btn-danger trash">
      🗑
    </button></div>
   </div>
