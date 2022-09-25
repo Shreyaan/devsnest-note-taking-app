@@ -98,6 +98,14 @@ nav {
   font-size: 17px;
 }
 
+.form-check{
+  margin-top: 15px;
+}
+
+.very_important{
+  border: 2px solid red !important;
+}
+
 #snackbar.show {
   visibility: visible;
   -webkit-animation: fadein 0.5s, fadeout 0.5s 0.5s;

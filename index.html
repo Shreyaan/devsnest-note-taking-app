@@ -1,84 +1,66 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <link rel="stylesheet" href="style.css" />
-    <link rel="stylesheet" href="styles1.css" />
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title> </title>
+<head>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="styles1.css" />
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <link
-      rel="stylesheet"
-      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-    />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.1/css/fontawesome.min.css"
-    />
-  </head>
-  <body>
-    <nav class="navbar navbar-expand-lg ">
-      <a class="navbar-brand" href="#"><img src="editor.png" height="50px" alt="Devsnest Editor">
-      </a>
+  <title> </title>
 
-      <form class="form-inline my-2 my-lg-0">
-        <input
-          class="form-control mr-sm-2"
-          id="searchTxt"
-          type="search"
-          placeholder="Search"
-          aria-label="Search"
-        />
-        <!-- <button class="btn btn-outline-success my-2 my-sm-0" id="clearBtn" type="reset">Clear</button> -->
-      </form>
-    </nav>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.1/css/fontawesome.min.css" />
+</head>
 
-    <div class="container my-3">
-      <div>
-        <p id="writer">Welcome To Devsnest Editor</p>
-        </div>
-      <div class="card">
-        <div class="card-body">
-          <h5 class="card-title">Add a note</h5>
+<body>
+  <nav class="navbar navbar-expand-lg ">
+    <a class="navbar-brand" href="#"><img src="editor.png" height="50px" alt="Devsnest Editor">
+    </a>
 
-          <div class="form-group">
-            <input
-              type="text"
-              class="form-control"
-              name=""
-              id="notesTitle"
-              placeholder="Notes Title"
-            />
-            <br />
-            <div class="" id="btn_row">
-              <button type="button" id="bold_button" class="btn btn-outline-primary">bold</button>
-              <button type="button" id="underline_button" class="btn btn-outline-primary">underline</button>
-            </div>
-            
-            <textarea
-              placeholder="Enter markdown for notes body"
-              class="form-control"
-              id="notesBody"
-              rows="5" 
-            ></textarea>
-          </div>
-          <button class="btn btn-primary" id="addBtn">Add Note</button>
-        </div>
-      </div>
-      <h1 id="notes_heading">Your Notes</h1>
-      <div id="notes" class="row container-fluid notes_container"></div>
+    <form class="form-inline my-2 my-lg-0">
+      <input class="form-control mr-sm-2" id="searchTxt" type="search" placeholder="Search" aria-label="Search" />
+      <!-- <button class="btn btn-outline-success my-2 my-sm-0" id="clearBtn" type="reset">Clear</button> -->
+    </form>
+  </nav>
+
+  <div class="container my-3">
+    <div>
+      <p id="writer">Welcome To Devsnest Editor</p>
     </div>
-    <div id="snackbar"> </div>
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">Add a note</h5>
 
-    <script src="index.js"></script>
-    <script
-      src="https://code.jquery.com/jquery-1.12.4.min.js"
-      integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ="
-      crossorigin="anonymous"
-    ></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-  </body>
+        <div class="form-group">
+          <input type="text" class="form-control" name="" id="notesTitle" placeholder="Notes Title" />
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" id="isImportant">
+            <label class="form-check-label" for="defaultCheck1">
+              Set Important
+            </label>
+          </div>
+        </div>
+        <div class="" id="btn_row">
+          <button type="button" id="bold_button" class="btn btn-outline-primary">bold</button>
+          <button type="button" id="underline_button" class="btn btn-outline-primary">underline</button>
+        </div>
+
+        <textarea placeholder="Enter markdown for notes body" class="form-control" id="notesBody" rows="5"></textarea>
+      </div>
+      <button class="btn btn-primary" id="addBtn">Add Note</button>
+    </div>
+  </div>
+  <h1 id="notes_heading">Your Notes</h1>
+  <div id="notes" class="row container-fluid notes_container"></div>
+  </div>
+  <div id="snackbar"> </div>
+
+  <script src="index.js"></script>
+  <script src="https://code.jquery.com/jquery-1.12.4.min.js"
+    integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</body>
+
 </html>
-

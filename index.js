@@ -2,11 +2,12 @@ if (localStorage.getItem("notes") == null || undefined) {
   noteObj = {
     title: "Markdown Preview",
     body: MarkdownPreview(),
+    important: false,
   };
   let mainNotesArray = [];
   mainNotesArray.push(noteObj);
-  mainNotesArray.push({ title: "", body: "note 2" });
-  mainNotesArray.push({ title: "note 3", body: "" });
+  mainNotesArray.push({ title: "", body: "note 2", important: true });
+  mainNotesArray.push({ title: "note 3", body: "", important: false });
   localStorage.setItem("notes", JSON.stringify(mainNotesArray));
 }
 
@@ -70,14 +71,17 @@ let addBtn = document.getElementById("addBtn");
 addBtn.addEventListener("click", function (e) {
   let NotesBody = document.getElementById("notesBody");
   let NotesTitle = document.getElementById("notesTitle");
+  let isImportant = document.getElementById("isImportant").checked;
   getNotesFromLocal();
   noteObj = {
     title: NotesTitle.value,
     body: removeTags(NotesBody.value),
+    important: isImportant,
   };
   mainNotesArray.push(noteObj);
   localStorage.setItem("notes", JSON.stringify(mainNotesArray));
   NotesBody.value = "";
+  document.getElementById("isImportant").checked = false;
   NotesTitle.value = "";
   showAllNotes();
 });
@@ -181,10 +185,10 @@ function getNotesFromLocal() {
 }
 
 function cardHtml(index, element) {
-
   let limit = 100;
   let truncatedNotesBody;
   let BodyText;
+  let isImportant = element.important;
   if (element.body.length >= limit) {
     truncatedNotesBody = element.body.slice(0, limit) + ".....";
     truncatedNotesBody = parseMd(truncatedNotesBody);
@@ -192,12 +196,16 @@ function cardHtml(index, element) {
   } else if (element.body.length > 0) {
     BodyText = parseMd(element.body);
   } else BodyText = "";
-  return ` <div class="noteCard my-2 mx-2 card" style="width: 18rem">
+  return ` <div class="noteCard my-2 mx-2 card ${
+    isImportant ? " very_important " : ""
+  } " style="width: 18rem">
 <div class="card-body">
   <div class="title_row">
     <h5 class="card-title">${element.title ? element.title : "Untitled"}</h5>
    <div class="note_button">
-   <button class="btn btn-success trash " onclick="copyFunc(${index})">  ${svgIcons("copy")}</button>
+   <button class="btn btn-success trash " onclick="copyFunc(${index})">  ${svgIcons(
+    "copy"
+  )}</button>
    <button id="${index}" onclick="deleteNote(this.id)" class="btn btn-danger trash">
      ${svgIcons("trash")}
    </button></div>
