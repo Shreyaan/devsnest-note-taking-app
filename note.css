@@ -58,16 +58,17 @@
   overflow-y: scroll;
   max-width: 50vw;
   max-height: 100vh;
+  min-height: 100vh;
   word-break: break-all;
 }
 
 #output-area *{
-  line-height: 1 !important;
+  line-height: 1em !important;
   text-align: left;
+  margin-bottom: -10px;
 }
-
 #note_preview_title {
-  margin-bottom: 30px;
+  margin-bottom: 32px;
 }
 #note_title {
   margin-bottom: 16px;

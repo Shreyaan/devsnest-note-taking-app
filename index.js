@@ -215,7 +215,7 @@ function cardHtml(index, element) {
   <hr />
   <div class="card-text" id="note_body">
   ${
-    isImportant ? "<small> <i>Important note:<i> </small>" : ""
+    isImportant ? "<small> Important note:</small>" : ""
   }
     ${BodyText}
   </div>
@@ -300,16 +300,15 @@ function parseMd(md) {
 }
 
 function MarkdownPreview() {
-  return `
-  # Markdown syntax guide
+  return `# Markdown syntax guide
 
 ## Headers 
  
-# This is a Heading h1
-## This is a Heading h2 
-###### This is a Heading h6
+#This is a Heading h1
+##This is a Heading h2 
+######This is a Heading h6
 
-## Emphasis
+##Emphasis
 
 *This text will be italic*  
 _This will also be italic_
