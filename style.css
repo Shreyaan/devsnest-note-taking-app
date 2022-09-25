@@ -62,16 +62,14 @@ nav{
 margin-left: 0px;
 }
 
-.note_button{
+.note_button *{
   display: flex;
   gap: 5px;
+  font-size: 1.15rem !important;
+  /* border: none !important; */
 }
 
 
-.tooltip {
- 
-  display: inline-block;
-}
 
 #snackbar {
   visibility: hidden;

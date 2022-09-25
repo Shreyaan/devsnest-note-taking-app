@@ -29,10 +29,11 @@
       </div>
       <div class="note_div">
         <div class="left_half">
-          <h1 > <input id="note_title" type="text"> </h1>
+          <h1 > <input class="form-control" placeholder="title" id="note_title" type="text"> </h1>
           <div class="" id="btn_row">
             <button type="button" id="bold_button" class="btn btn-outline-primary">bold</button>
             <button type="button" id="underline_button" class="btn btn-outline-primary">underline</button>
+            <button type="button" id="copy_btn" class="btn btn-outline-primary">copy📋</button>
           </div>
           <div class="input-output">
             <textarea id="input-area" rows="30" cols="50"></textarea>
@@ -48,7 +49,7 @@
         </div>
       </div>
     </div>
-
+    <div id="snackbar"> </div>
     <script src="note.js"></script>
   </body>
 </html>

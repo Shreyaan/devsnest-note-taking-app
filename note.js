@@ -62,6 +62,90 @@ function handleTitleInput() {
   localStorage.setItem("notes", JSON.stringify(notes));
 }
 
+let copy_btn= document.getElementById("copy_btn")
+copy_btn.addEventListener('click', copyFunc)
+
+function copyFunc() {
+   let copyText = getNoteFromLocal()
+   let title
+   let body =copyText.body
+   if(copyText.title==null|| copyText.title== undefined||copyText.title== '') title = "Untitled"
+   else title = copyText.title
+
+   if(copyText.body == false) body = ""
+   navigator.clipboard.writeText(title + '\n' + body);
+    showSnackBar("Note copied!!")
+ }
+ function showSnackBar(msg) {
+  let snackbar = document.getElementById("snackbar");
+  snackbar.innerHTML = msg
+  snackbar.className = "show";
+  setTimeout(function(){ snackbar.className = snackbar.className.replace("show", ""); }, 1500)}
+
+
+formatButtons();
+
+function formatButtons() {
+  let boldBtn = document.getElementById("bold_button");
+  boldBtn.addEventListener("click", function () {
+    let NotesBody = document.getElementById("input-area");
+
+    let selectedText = window.getSelection().toString();
+    let location = NotesBody.value.indexOf(selectedText);
+    let startingString = NotesBody.value.slice(0, location);
+    let endingString = NotesBody.value.slice(
+      selectedText.length + startingString.length,
+      NotesBody.value.length
+    );
+    if (selectedText == null || selectedText == undefined || selectedText == "") {
+      NotesBody.value += " **" + "Bold text" + "**";
+      NotesBody.focus();
+      NotesBody.selectionStart = NotesBody.value.length - 11;
+      NotesBody.selectionEnd = NotesBody.value.length - 2;
+      // }
+      return;
+    }
+    if (location == 0) {
+      NotesBody.value =
+        startingString + " **" + selectedText + "**" + endingString;
+    } else {
+      NotesBody.value =
+        startingString + "**" + selectedText + "**" + endingString;
+    }
+    outputArea.innerHTML = parseMd(removeTags(inputArea.value));
+    let notes = JSON.parse(localStorage.getItem("notes"));
+    notes[params.id].body = removeTags(inputArea.value);
+    localStorage.setItem("notes", JSON.stringify(notes));
+  });
+
+  let underLineBtn = document.getElementById("underline_button");
+
+  underLineBtn.addEventListener("click", function () {
+    let NotesBody = document.getElementById("input-area");
+
+    let selectedText = window.getSelection().toString();
+    let location = NotesBody.value.indexOf(selectedText);
+    let startingString = NotesBody.value.slice(0, location);
+    let endingString = NotesBody.value.slice(
+      selectedText.length + startingString.length,
+      NotesBody.value.length
+    );
+    if (selectedText == null || selectedText == undefined || selectedText == "") {
+      NotesBody.value += " --" + "underline text" + "--";
+      NotesBody.focus();
+      NotesBody.selectionStart = NotesBody.value.length - 16;
+      NotesBody.selectionEnd = NotesBody.value.length - 2;
+      return;
+    }
+
+    NotesBody.value = startingString + "--" + selectedText + "--" + endingString;
+    outputArea.innerHTML = parseMd(removeTags(inputArea.value));
+    let notes = JSON.parse(localStorage.getItem("notes"));
+    notes[params.id].body = removeTags(inputArea.value);
+    localStorage.setItem("notes", JSON.stringify(notes));
+  });
+}
+
 function removeTags(str) {
   if (str === null || str === "") return false;
   else str = str.toString();
@@ -72,67 +156,6 @@ function removeTags(str) {
       newStr;
   return newStr;
 }
-
-let boldBtn = document.getElementById("bold_button");
-
-//better way - https://stackoverflow.com/a/28663818
-boldBtn.addEventListener("click", function () {
-  let NotesBody = document.getElementById("input-area");
-
-  let selectedText = window.getSelection().toString();
-  let location = NotesBody.value.indexOf(selectedText);
-  let startingString = NotesBody.value.slice(0, location);
-  let endingString = NotesBody.value.slice(
-    selectedText.length + startingString.length,
-    NotesBody.value.length
-  );
-  if (selectedText == null || selectedText == undefined || selectedText == "") {
-    NotesBody.value += " **" + "Bold text" + "**";
-    NotesBody.focus();
-    NotesBody.selectionStart = NotesBody.value.length - 11;
-    NotesBody.selectionEnd = NotesBody.value.length - 2;
-    // }
-    return;
-  }
-  if (location == 0) {
-    NotesBody.value =
-      startingString + " **" + selectedText + "**" + endingString;
-  } else {
-    NotesBody.value =
-      startingString + "**" + selectedText + "**" + endingString;
-  }
-  outputArea.innerHTML = parseMd(removeTags(inputArea.value));
-  let notes = JSON.parse(localStorage.getItem("notes"));
-  notes[params.id].body = removeTags(inputArea.value);
-  localStorage.setItem("notes", JSON.stringify(notes));
-});
-
-let underLineBtn = document.getElementById("underline_button");
-
-underLineBtn.addEventListener("click", function () {
-  let NotesBody = document.getElementById("input-area");
-
-  let selectedText = window.getSelection().toString();
-  let location = NotesBody.value.indexOf(selectedText);
-  let startingString = NotesBody.value.slice(0, location);
-  let endingString = NotesBody.value.slice(
-    selectedText.length + startingString.length,
-    NotesBody.value.length
-  );
-  if (selectedText == null || selectedText == undefined || selectedText == "") {
-    NotesBody.value += " --" + "underline text" + "--";
-    NotesBody.focus();
-    NotesBody.selectionStart = NotesBody.value.length - 16;
-    NotesBody.selectionEnd = NotesBody.value.length - 2;
-    return;
-  }
-
-  NotesBody.value = startingString + "--" + selectedText + "--" + endingString;
-  outputArea.innerHTML = parseMd(removeTags(inputArea.value));
-  let notes = JSON.parse(localStorage.getItem("notes"));
-  notes[params.id].body = removeTags(inputArea.value);
-  localStorage.setItem("notes", JSON.stringify(notes));
-});
 
 //https://codepen.io/kvendrik/pen/bGKeEE
 function parseMd(md) {
