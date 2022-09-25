@@ -3,10 +3,15 @@ const params = Object.fromEntries(urlSearchParams.entries());
 
 let mainDiv = document.getElementById("main_note_div");
 
-if (localStorage.getItem("notes") == null||undefined ||params.id== null||undefined) {
-    mainDiv.innerHTML = `  <div class="error"><h3>No Notes exist. Please add them from the  <a href="./">main page</h3></div></a>`;
-    throw new Error("this note isnt available 🙁");
-  }
+if (
+  localStorage.getItem("notes") == null ||
+  undefined ||
+  params.id == null ||
+  undefined
+) {
+  mainDiv.innerHTML = `  <div class="error"><h3>No Notes exist. Please add them from the  <a href="./">main page</h3></div></a>`;
+  throw new Error("this note isnt available 🙁");
+}
 
 let note = getNoteFromLocal();
 
@@ -35,15 +40,14 @@ if (note.title) {
 }
 
 inputArea.value = note.body;
-outputArea.innerHTML = parseMd((inputArea.value));
+outputArea.innerHTML = parseMd(inputArea.value);
 
 inputArea.addEventListener("input", () => handleBodyInput());
 
 function handleBodyInput() {
-    if(document.querySelector('.right_half').style.display!='none'){
-
-        outputArea.innerHTML = parseMd(removeTags(inputArea.value));
-    }
+  if (document.querySelector(".right_half").style.display != "none") {
+    outputArea.innerHTML = parseMd(removeTags(inputArea.value));
+  }
   let notes = JSON.parse(localStorage.getItem("notes"));
   notes[params.id].body = removeTags(inputArea.value);
   localStorage.setItem("notes", JSON.stringify(notes));
@@ -52,9 +56,9 @@ function handleBodyInput() {
 noteTitleEl.addEventListener("input", () => handleTitleInput());
 
 function handleTitleInput() {
-    noteTitlePreviewEl.innerText = noteTitleEl.value + " - preview";
+  noteTitlePreviewEl.innerText = noteTitleEl.value + " - preview";
   let notes = JSON.parse(localStorage.getItem("notes"));
-  notes[params.id].title = noteTitleEl.value
+  notes[params.id].title = noteTitleEl.value;
   localStorage.setItem("notes", JSON.stringify(notes));
 }
 
@@ -68,6 +72,67 @@ function removeTags(str) {
       newStr;
   return newStr;
 }
+
+let boldBtn = document.getElementById("bold_button");
+
+//better way - https://stackoverflow.com/a/28663818
+boldBtn.addEventListener("click", function () {
+  let NotesBody = document.getElementById("input-area");
+
+  let selectedText = window.getSelection().toString();
+  let location = NotesBody.value.indexOf(selectedText);
+  let startingString = NotesBody.value.slice(0, location);
+  let endingString = NotesBody.value.slice(
+    selectedText.length + startingString.length,
+    NotesBody.value.length
+  );
+  if (selectedText == null || selectedText == undefined || selectedText == "") {
+    NotesBody.value += " **" + "Bold text" + "**";
+    NotesBody.focus();
+    NotesBody.selectionStart = NotesBody.value.length - 11;
+    NotesBody.selectionEnd = NotesBody.value.length - 2;
+    // }
+    return;
+  }
+  if (location == 0) {
+    NotesBody.value =
+      startingString + " **" + selectedText + "**" + endingString;
+  } else {
+    NotesBody.value =
+      startingString + "**" + selectedText + "**" + endingString;
+  }
+  outputArea.innerHTML = parseMd(removeTags(inputArea.value));
+  let notes = JSON.parse(localStorage.getItem("notes"));
+  notes[params.id].body = removeTags(inputArea.value);
+  localStorage.setItem("notes", JSON.stringify(notes));
+});
+
+let underLineBtn = document.getElementById("underline_button");
+
+underLineBtn.addEventListener("click", function () {
+  let NotesBody = document.getElementById("input-area");
+
+  let selectedText = window.getSelection().toString();
+  let location = NotesBody.value.indexOf(selectedText);
+  let startingString = NotesBody.value.slice(0, location);
+  let endingString = NotesBody.value.slice(
+    selectedText.length + startingString.length,
+    NotesBody.value.length
+  );
+  if (selectedText == null || selectedText == undefined || selectedText == "") {
+    NotesBody.value += " --" + "underline text" + "--";
+    NotesBody.focus();
+    NotesBody.selectionStart = NotesBody.value.length - 16;
+    NotesBody.selectionEnd = NotesBody.value.length - 2;
+    return;
+  }
+
+  NotesBody.value = startingString + "--" + selectedText + "--" + endingString;
+  outputArea.innerHTML = parseMd(removeTags(inputArea.value));
+  let notes = JSON.parse(localStorage.getItem("notes"));
+  notes[params.id].body = removeTags(inputArea.value);
+  localStorage.setItem("notes", JSON.stringify(notes));
+});
 
 //https://codepen.io/kvendrik/pen/bGKeEE
 function parseMd(md) {

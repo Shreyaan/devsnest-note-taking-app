@@ -68,8 +68,8 @@
   margin-bottom: 16px;
   max-width: 40vw;
 }
-.mobile_only{
-    display: none;
+.mobile_only {
+  display: none;
 }
 
 @media screen and (max-width: 700px) {
@@ -80,16 +80,26 @@
   #input-area {
     max-width: 100vw !important;
   }
-  #note_title{
+  #note_title {
     max-width: 80vw;
   }
-  .mobile_only{
+  .mobile_only {
     display: block;
   }
 }
-nav{
+nav {
   background-color: #077bff;
 }
- .navbar-brand{
+.navbar-brand {
   color: black;
- }
+}
+
+.all_notes:hover {
+  color: #000;
+  text-decoration: underline;
+  transform: scale(1.1) !important;
+}
+
+#btn_row {
+  margin-bottom: 2px;
+}
