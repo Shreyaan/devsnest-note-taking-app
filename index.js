@@ -197,8 +197,8 @@ function cardHtml(index, element) {
   <div class="title_row">
     <h5 class="card-title">${element.title ? element.title : "Untitled"}</h5>
    <div class="note_button">
-   <button class="btn btn-outline-success trash " onclick="copyFunc(${index})">  ${svgIcons("copy")}</button>
-   <button id="${index}" onclick="deleteNote(this.id)" class="btn btn-outline-danger trash">
+   <button class="btn btn-success trash " onclick="copyFunc(${index})">  ${svgIcons("copy")}</button>
+   <button id="${index}" onclick="deleteNote(this.id)" class="btn btn-danger trash">
      ${svgIcons("trash")}
    </button></div>
   </div>
