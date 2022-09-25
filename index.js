@@ -160,7 +160,7 @@ function showSnackBar(msg) {
   let snackbar = document.getElementById("snackbar");
   snackbar.innerHTML = msg
   snackbar.className = "show";
-  setTimeout(function(){ snackbar.className = snackbar.className.replace("show", ""); }, 3000)}
+  setTimeout(function(){ snackbar.className = snackbar.className.replace("show", ""); }, 1500)}
 
 function getNotesFromLocal() {
   let notes = localStorage.getItem("notes");
