@@ -62,9 +62,12 @@ nav{
 margin-left: 0px;
 }
 
-.note_button *{
+.note_button {
   display: flex;
   gap: 5px;
+}
+.note_button *{
+ 
   font-size: 1.15rem !important;
   /* border: none !important; */
 }
