@@ -15,15 +15,13 @@ body {
 }
 
 #writer{
-  overflow: hidden;
-  /* white-space: nowrap; */
-  animation: text 2s forwards;
-  /* animation: ; */
-  
   font-size: 35px;
   
 }
-
+ #writer::after{
+  content: "|";
+  animation: blink .5s infinite;
+ }
 
 
 @keyframes text{
