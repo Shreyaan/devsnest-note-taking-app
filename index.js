@@ -1,16 +1,14 @@
-if (localStorage.getItem("notes") == null||undefined ) {
+if (localStorage.getItem("notes") == null || undefined) {
   noteObj = {
-    title: 'Markdown Preview',
+    title: "Markdown Preview",
     body: MarkdownPreview(),
   };
-  let mainNotesArray=[]
+  let mainNotesArray = [];
   mainNotesArray.push(noteObj);
   localStorage.setItem("notes", JSON.stringify(mainNotesArray));
 }
 
 showAllNotes();
-
-
 
 let boldBtn = document.getElementById("bold_button");
 
@@ -26,12 +24,12 @@ boldBtn.addEventListener("click", function () {
     NotesBody.value.length
   );
   if (selectedText == null || selectedText == undefined || selectedText == "") {
-      NotesBody.value = " **" + document.getElementById("notesBody").value + "**";
-      if(document.activeElement!=NotesBody){
-        NotesBody.focus()
-        NotesBody.selectionStart=3
-        NotesBody.selectionEnd=3
-      }
+    NotesBody.value = " **" + document.getElementById("notesBody").value + "**";
+    if (document.activeElement != NotesBody) {
+      NotesBody.focus();
+      NotesBody.selectionStart = 3;
+      NotesBody.selectionEnd = 3;
+    }
     return;
   }
   if (location == 0) {
@@ -57,16 +55,15 @@ underLineBtn.addEventListener("click", function () {
   );
   if (selectedText == null || selectedText == undefined || selectedText == "") {
     NotesBody.value = "--" + document.getElementById("notesBody").value + "--";
-    if(document.activeElement!=NotesBody){
-        NotesBody.focus()
-        NotesBody.selectionStart=2
-        NotesBody.selectionEnd=2
-      }
+    if (document.activeElement != NotesBody) {
+      NotesBody.focus();
+      NotesBody.selectionStart = 2;
+      NotesBody.selectionEnd = 2;
+    }
     return;
   }
 
-  NotesBody.value =
-    startingString + "--" + selectedText + "--" + endingString;
+  NotesBody.value = startingString + "--" + selectedText + "--" + endingString;
 });
 
 let addBtn = document.getElementById("addBtn");
@@ -158,9 +155,12 @@ function cardHtml(index, element) {
     '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M20 4h-20v-2h5.711c.9 0 1.631-1.099 1.631-2h5.316c0 .901.73 2 1.631 2h5.711v2zm-7 15.5c0-1.267.37-2.447 1-3.448v-6.052c0-.552.447-1 1-1s1 .448 1 1v4.032c.879-.565 1.901-.922 3-1.006v-7.026h-18v18h13.82c-1.124-1.169-1.82-2.753-1.82-4.5zm-7 .5c0 .552-.447 1-1 1s-1-.448-1-1v-10c0-.552.447-1 1-1s1 .448 1 1v10zm5 0c0 .552-.447 1-1 1s-1-.448-1-1v-10c0-.552.447-1 1-1s1 .448 1 1v10zm13-.5c0 2.485-2.017 4.5-4.5 4.5s-4.5-2.015-4.5-4.5 2.017-4.5 4.5-4.5 4.5 2.015 4.5 4.5zm-3.086-2.122l-1.414 1.414-1.414-1.414-.707.708 1.414 1.414-1.414 1.414.707.708 1.414-1.414 1.414 1.414.708-.708-1.414-1.414 1.414-1.414-.708-.708z"/></svg>';
 
   let limit = 150;
-  let truncatedNotesBody = element.body.slice(0, limit) + ".....";
-  truncatedNotesBody=parseMd(truncatedNotesBody)
-  let mdParsed = parseMd(element.body)
+  let truncatedNotesBody;
+  if (element.body.length >= limit) {
+    truncatedNotesBody = element.body.slice(0, limit) + ".....";
+    truncatedNotesBody = parseMd(truncatedNotesBody);
+  }
+  let mdParsed = parseMd(element.body);
   return ` <div class="noteCard my-2 mx-2 card" style="width: 18rem">
                   <div class="card-body">
                     <div class="title_row">
@@ -197,8 +197,8 @@ function removeTags(str) {
 
 //https://codepen.io/kvendrik/pen/bGKeEE
 function parseMd(md) {
-    //underline
-    md = md.replace(/[\-\_]{2}([^\-\_]+)[\-\_]{2}/g, "<u>$1</u>");
+  //underline
+  md = md.replace(/[\-\_]{2}([^\-\_]+)[\-\_]{2}/g, "<u>$1</u>");
   //ul
   md = md.replace(/^\s*\n\*/gm, "<ul>\n*");
   md = md.replace(/^(\*.+)\s*\n([^\*])/gm, "$1\n</ul>\n\n$2");
@@ -258,7 +258,7 @@ function parseMd(md) {
   return md;
 }
 
-function MarkdownPreview(){
+function MarkdownPreview() {
   return `
   # Markdown syntax guide
 
@@ -308,5 +308,5 @@ _You **can** combine them_
 >
 >> Markdown is often used to format readme files, for writing messages in online discussion forums, and to create rich text using a plain text editor.
 
-  `
+  `;
 }
