@@ -28,12 +28,11 @@ boldBtn.addEventListener("click", function () {
     NotesBody.value.length
   );
   if (selectedText == null || selectedText == undefined || selectedText == "") {
-    NotesBody.value = " **" + document.getElementById("notesBody").value + "**";
-    if (document.activeElement != NotesBody) {
+      NotesBody.value += " **" +  'Bold text' + "**"
       NotesBody.focus();
-      NotesBody.selectionStart = 3;
-      NotesBody.selectionEnd = 3;
-    }
+      NotesBody.selectionStart= NotesBody.value.length-11
+      NotesBody.selectionEnd= NotesBody.value.length-2
+    // }
     return;
   }
   if (location == 0) {
@@ -58,12 +57,10 @@ underLineBtn.addEventListener("click", function () {
     NotesBody.value.length
   );
   if (selectedText == null || selectedText == undefined || selectedText == "") {
-    NotesBody.value = "--" + document.getElementById("notesBody").value + "--";
-    if (document.activeElement != NotesBody) {
-      NotesBody.focus();
-      NotesBody.selectionStart = 2;
-      NotesBody.selectionEnd = 2;
-    }
+    NotesBody.value += " --" +  'underline text' + "--"
+    NotesBody.focus();
+    NotesBody.selectionStart= NotesBody.value.length-16
+    NotesBody.selectionEnd= NotesBody.value.length-2
     return;
   }
 
