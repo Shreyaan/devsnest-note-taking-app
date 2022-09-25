@@ -35,17 +35,17 @@ if (note.title) {
 }
 
 inputArea.value = note.body;
-outputArea.innerHTML = parseMd(inputArea.value);
+outputArea.innerHTML = parseMd((inputArea.value));
 
 inputArea.addEventListener("input", () => handleBodyInput());
 
 function handleBodyInput() {
     if(document.querySelector('.right_half').style.display!='none'){
 
-        outputArea.innerHTML = parseMd(inputArea.value);
+        outputArea.innerHTML = parseMd(removeTags(inputArea.value));
     }
   let notes = JSON.parse(localStorage.getItem("notes"));
-  notes[params.id].body = inputArea.value;
+  notes[params.id].body = removeTags(inputArea.value);
   localStorage.setItem("notes", JSON.stringify(notes));
 }
 
@@ -64,7 +64,7 @@ function removeTags(str) {
   let newStr = str.replace(/(<([^>]+)>)/gi, "");
   if (newStr != str)
     newStr =
-      "<small><i>*html tags has been removed from this note</i> <br></small>" +
+      "<small><i>●html tags have been removed from this note</i> <br></small>" +
       newStr;
   return newStr;
 }

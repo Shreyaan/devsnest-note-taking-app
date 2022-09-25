@@ -194,7 +194,7 @@ function removeTags(str) {
   let newStr = str.replace(/(<([^>]+)>)/gi, "");
   if (newStr != str)
     newStr =
-      "<small><i>*html tags has been removed from this note</i> <br></small>" +
+      "<small><i>●html tags have been removed from this note</i> <br></small>" +
       newStr;
   return newStr;
 }
