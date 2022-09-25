@@ -6,6 +6,7 @@
 .title_row h5 {
   display: inline;
   width: fit-content;
+  max-width: 160px;
 }
 .title_row button {
   height: min-content;
