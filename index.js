@@ -6,7 +6,9 @@ if (localStorage.getItem("notes") == null || undefined) {
   };
   let mainNotesArray = [];
   mainNotesArray.push(noteObj);
-  mainNotesArray.push({ title: "", body: "note 2", important: true });
+  mainNotesArray.push({ title: "", body: `Welcome To Devsnest Editor
+
+  `, important: true });
   mainNotesArray.push({ title: "note 3", body: "", important: false });
   localStorage.setItem("notes", JSON.stringify(mainNotesArray));
 }
@@ -212,9 +214,13 @@ function cardHtml(index, element) {
   </div>
   <hr />
   <div class="card-text" id="note_body">
+  ${
+    isImportant ? "<small> <i>Important note:<i> </small>" : ""
+  }
     ${BodyText}
   </div>
   <a href="note.html?id=${index}" class="btn btn-outline-primary" role="button">Go to note</a>
+ 
 </div>
 </div> `;
 }
