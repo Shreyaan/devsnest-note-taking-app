@@ -107,6 +107,7 @@ nav {
 
 #btn_row {
   margin-bottom: 2px;
+  text-align: left !important;
 }
 
 .important_note_ta{
