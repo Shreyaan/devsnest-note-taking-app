@@ -121,8 +121,8 @@ function runSearch() {
       didItRan = true;
 
       Array.from(noteCardsArray).forEach(function (element) {
-        let cardBody = element.querySelectorAll("#note_body")[0].innerText;
-        let cardTitle = element.getElementsByTagName("h5")[0].innerText;
+        let cardBody = element.querySelectorAll("#note_body")[0].innerHTML.toLowerCase();
+        let cardTitle = element.getElementsByTagName("h5")[0].innerText.toLowerCase();
         if (cardTitle.includes(inputValue) || cardBody.includes(inputValue)) {
           element.style.display = "block";
         } else {
