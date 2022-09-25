@@ -87,3 +87,9 @@
     display: block;
   }
 }
+ nav{
+  background-color: #077bff ;
+ }
+ .navbar-brand{
+  color: black;
+ }
