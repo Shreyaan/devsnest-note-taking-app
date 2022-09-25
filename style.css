@@ -20,6 +20,10 @@
     transform: scale(1.2) !important;
 }
 
+#btn_row{
+  margin-bottom: 1px;
+}
+
 @media screen and (min-width: 900px) {
     nav{
         padding: 15px 50px !important;

@@ -52,14 +52,16 @@
               placeholder="Notes Title"
             />
             <br />
-            <button type="button" id="bold_button" class="btn btn-outline-primary">bold</button>
-            <button type="button" id="underline_button" class="btn btn-outline-primary">underline</button>
+            <div class="" id="btn_row">
+              <button type="button" id="bold_button" class="btn btn-outline-primary">bold</button>
+              <button type="button" id="underline_button" class="btn btn-outline-primary">underline</button>
+            </div>
             
             <textarea
-              placeholder="notes body"
+              placeholder="Enter markdown for notes body"
               class="form-control"
               id="notesBody"
-              rows="12" 
+              rows="5" 
             ></textarea>
           </div>
           <button class="btn btn-primary" id="addBtn">Add Note</button>
