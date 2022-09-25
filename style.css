@@ -159,3 +159,7 @@ nav {
     opacity: 0;
   }
 }
+
+.searchBar{
+  flex-wrap: nowrap !important;
+}

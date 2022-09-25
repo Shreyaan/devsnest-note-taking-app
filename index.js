@@ -6,9 +6,13 @@ if (localStorage.getItem("notes") == null || undefined) {
   };
   let mainNotesArray = [];
   mainNotesArray.push(noteObj);
-  mainNotesArray.push({ title: "", body: `Welcome To Devsnest Editor
+  mainNotesArray.push({
+    title: "",
+    body: `Welcome To Devsnest Editor
 
-  `, important: true });
+  `,
+    important: true,
+  });
   mainNotesArray.push({ title: "note 3", body: "", important: false });
   localStorage.setItem("notes", JSON.stringify(mainNotesArray));
 }
@@ -113,11 +117,46 @@ function deleteNote(index) {
   showAllNotes();
 }
 
+let impSearchBtn = document.getElementById("impSearchBtn");
+impSearchBtn.addEventListener("click", insertImp);
+function insertImp(e) {
+  e.preventDefault()
+  let search = document.getElementById("searchTxt");
+  let didItRan = false;
+  search.value = "important";
+
+  let inputValue = search.value.toLowerCase();
+  let noteCardsArray = document.getElementsByClassName("noteCard");
+  if (inputValue.length) {
+    didItRan = true;
+
+    Array.from(noteCardsArray).forEach(function (element) {
+      let cardBody = element
+        .querySelectorAll("#note_body")[0]
+        .innerHTML.toLowerCase();
+      let cardTitle = element
+        .getElementsByTagName("h5")[0]
+        .innerText.toLowerCase();
+      if (cardTitle.includes(inputValue) || cardBody.includes(inputValue)) {
+        element.style.display = "block";
+      } else {
+        element.style.display = "none";
+      }
+    });
+  }
+  //reset search
+  if (!inputValue.length && didItRan) {
+    Array.from(noteCardsArray).forEach(function (element) {
+      element.style.display = "block";
+    });
+  }
+}
+
 runSearch();
 
 function runSearch() {
   let search = document.getElementById("searchTxt");
-  let didItRan = false;
+  let didItRan = true;
 
   search.addEventListener("input", function () {
     let inputValue = search.value.toLowerCase();
@@ -214,9 +253,7 @@ function cardHtml(index, element) {
   </div>
   <hr />
   <div class="card-text" id="note_body">
-  ${
-    isImportant ? "<small> Important note:</small>" : ""
-  }
+  ${isImportant ? "<small> Important note:</small>" : ""}
     ${BodyText}
   </div>
   <a href="note.html?id=${index}" class="btn btn-outline-primary" role="button">Go to note</a>
