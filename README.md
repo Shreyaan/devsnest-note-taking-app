@@ -40,4 +40,5 @@ Its a vanilla js project so you can just download it and serve using any host
 # todos
 - [ ] dark mode 😳?? 
 - [ ] convert it to react or nextjs 
-- [ ] add a backend and dB (it will solve the need to remove html tags in input because then the preview could be rendered in an iframe so html won't interfere with rest of page) 
+- [ ] add a backend and dB (it will solve the need to purge html tags at input because then the preview could be rendered in an iframe so html won't interfere with rest of page
+and potentially allow users to embed stuff like yt videos) 
