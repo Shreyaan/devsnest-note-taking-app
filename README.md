@@ -37,3 +37,7 @@ Its a vanilla js project so you can just download it and serve using any host
 - [Adityasikarwar70](https://github.com/Adityasikarwar70)
 - [Harshi2001](https://github.com/Harshi2001)
 
+# todos
+- [ ] dark mode 😳?? 
+- [ ] convert it to react or nextjs 
+- [ ] add a backend and dB (it will solve the need to remove html tags in input because then the preview could be rendered in an iframe so html won't interfere with rest of page) 
