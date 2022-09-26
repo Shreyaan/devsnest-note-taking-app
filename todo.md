@@ -1,10 +1,12 @@
 # todos
-- [X]  placeholder of text area to have word markdown
-- [x ] animation looks irritating after first time 
-- [x ] buttons mein margin aur padding 
-- [ x] notes preview should work on mobile too 
-- [ x] bg lagana hai 
-- [ ] bold underline button in notes page
-- [ x] copy button ☠️
-- [ x] pressing bold bolds everything 
+- [X] placeholder of text area to have word markdown
+- [x] animation looks irritating after first time 
+- [x] buttons mein margin aur padding 
+- [x] notes preview should work on mobile too 
+- [x] bg lagana hai 
+- [x] bold underline button in notes page
+- [x] copy button ☠️
+- [x] bug: pressing bold bolds everything 
 - [ ] dark mode 😳
+- [ ] remake it in react 
+- [ ] add a backend and dB (it will solve the need to remove html tags in input because then the preview could be rendered in an iframe so html won't interfere with rest of page) 
