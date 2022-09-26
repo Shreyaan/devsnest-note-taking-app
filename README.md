@@ -22,6 +22,8 @@ https://devsnest-note-taking-app.vercel.app/
 - You can use bold/ underline buttons to format text
 - Note editor/ preview page uses query parameters so you can bookmark your favourite notes 
 - You can copy your notes with single button
+- You can mark notes as important and search for important notes 
+
 ## Deployment
 
 Its a vanilla js project so you can just download it and serve using any host
