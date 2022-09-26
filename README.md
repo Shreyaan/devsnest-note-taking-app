@@ -43,3 +43,4 @@ Its a vanilla js project so you can just download it and serve using any host
 - [ ] add a backend and dB (it will solve the need to purge html tags at input because then the preview could be rendered in an iframe so html won't interfere with rest of page
 and potentially allow users to embed stuff like yt videos) 
 another approach - https://stackoverflow.com/questions/8702704/alternative-to-iframes-with-html5
+- [ ] add custom id in note use uuid for default ids
